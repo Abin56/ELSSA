@@ -7,14 +7,21 @@ import '../../../core/errors/app_exception.dart';
 import '../../../core/errors/firebase_error_handler.dart';
 
 class AuthService {
+  // Public parameter names are kept for DI call-site readability; true
+  // initializing formals would force callers to use the private field
+  // names (`_firebaseAuth: ...`), which isn't possible outside this library.
   AuthService({
     required FirebaseAuth firebaseAuth,
     required GoogleSignIn googleSignIn,
     required FacebookAuth facebookAuth,
     required FirebaseFirestore firestore,
+    // ignore: prefer_initializing_formals
   }) : _firebaseAuth = firebaseAuth,
+       // ignore: prefer_initializing_formals
        _googleSignIn = googleSignIn,
+       // ignore: prefer_initializing_formals
        _facebookAuth = facebookAuth,
+       // ignore: prefer_initializing_formals
        _firestore = firestore;
 
   final FirebaseAuth _firebaseAuth;
@@ -99,7 +106,10 @@ class AuthService {
       );
     }
 
-  
+    // Deprecated by Firebase for email-enumeration protection, where it
+    // always returns []; treat an empty result as "unknown" and fall
+    // through to the Google link attempt rather than blocking the user.
+    // ignore: deprecated_member_use
     final methods = await _firebaseAuth.fetchSignInMethodsForEmail(email);
     if (methods.isNotEmpty && !methods.contains('google.com')) {
       throw AppException(
