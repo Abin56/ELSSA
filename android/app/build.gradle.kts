@@ -21,6 +21,8 @@ if (localPropertiesFile.exists()) {
     localProperties.load(localPropertiesFile.inputStream())
 }
 val googleMapsApiKey = localProperties.getProperty("googleMaps.apiKey") ?: "YOUR_API_KEY"
+val facebookAppId = localProperties.getProperty("facebook.appId") ?: "YOUR_FACEBOOK_APP_ID"
+val facebookClientToken = localProperties.getProperty("facebook.clientToken") ?: "YOUR_FACEBOOK_CLIENT_TOKEN"
 
 android {
     namespace = "com.example.elssa"
@@ -39,6 +41,9 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         manifestPlaceholders["googleMapsApiKey"] = googleMapsApiKey
+        manifestPlaceholders["facebookAppId"] = facebookAppId
+        manifestPlaceholders["facebookClientToken"] = facebookClientToken
+        manifestPlaceholders["fbLoginProtocolScheme"] = "fb$facebookAppId"
     }
 
     signingConfigs {

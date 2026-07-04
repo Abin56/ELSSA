@@ -22,7 +22,7 @@ class HomeServiceCard extends StatelessWidget {
       onTap: onTap,
       borderRadius: BorderRadius.circular(AppConstants.radiusMd),
       child: SizedBox(
-        width: 100,
+        width: 125,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -33,7 +33,7 @@ class HomeServiceCard extends StatelessWidget {
                 child: imageAsset != null
                     ? Image.asset(
                         imageAsset!,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.scaleDown,
                         filterQuality: FilterQuality.high,
                       )
                     : Container(

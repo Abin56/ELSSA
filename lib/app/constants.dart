@@ -77,7 +77,8 @@ class AppAssets {
   static const String fixedPrices = '$_whyChooseUsImages/fixed_prices.png';
   static const String hassleFree = '$_whyChooseUsImages/hassle_free.png';
 
-  static const String safetyIcon = '$_safetyImages/safety_icon.png';
+  static const String maskIcon = '$_safetyImages/mask_icon.png';
+  static const String lowContactIcon = '$_safetyImages/low_contact_icon.png';
 
   static const String isoBadge = '$_trustBadgeImages/iso_badge.jpg';
   static const String verifiedBadge = '$_trustBadgeImages/verified_badge.png';

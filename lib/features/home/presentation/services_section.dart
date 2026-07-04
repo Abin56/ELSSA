@@ -68,12 +68,12 @@ class _PopularServicesList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 128,
+      height: 148,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: services.length,
         separatorBuilder: (context, index) =>
-            const SizedBox(width: AppConstants.spaceMd),
+            const SizedBox(width: AppConstants.spaceLg),
         itemBuilder: (context, index) {
           final service = services[index];
           return TweenAnimationBuilder<double>(

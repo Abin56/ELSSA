@@ -126,6 +126,9 @@ class FirebaseErrorHandler {
         return 'Please log in again to continue.';
       case 'credential-already-in-use':
         return 'This account is already linked to another user.';
+      case 'account-exists-with-different-credential':
+        return 'An account already exists with this email using a '
+            'different sign-in method. Please sign in with that method.';
       case 'user-mismatch':
         return 'These credentials do not match the signed-in user.';
       case 'user-token-expired':

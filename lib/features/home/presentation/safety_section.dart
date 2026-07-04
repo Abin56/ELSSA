@@ -35,27 +35,42 @@ class SafetySection extends StatelessWidget {
             vertical: AppConstants.spaceLg,
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SafetyTile(
-                icon: Icons.masks_outlined,
-                title: 'Usage of masks, gloves & Sanitisers',
-                description:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing in. Dictumst nullam mauris malesuada in. Eget in condimentum portior nec tristique penatibus ipsum.',
-              ),
-              const SizedBox(height: AppConstants.spaceLg),
-              SafetyTile(
-                image: AppAssets.safetyIcon,
-                title: 'Low-contact Service Experience',
-                description:
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing in. Dictumst nullam mauris malesuada in. Eget in condimentum portior nec tristique penatibus ipsum.',
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(AppConstants.spaceLg),
+                decoration: BoxDecoration(
+                  // color: AppColors.primaryLight,
+                  borderRadius: BorderRadius.circular(AppConstants.radiusLg),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SafetyTile(
+                      image: AppAssets.maskIcon,
+                      title: 'Usage of masks, gloves & Sanitisers',
+                      description:
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing in. Dictumst nullam mauris malesuada in. Eget in condimentum portior nec tristique penatibus ipsum.',
+                    ),
+                    const SizedBox(height: AppConstants.spaceLg),
+                    const SafetyTile(
+                      image: AppAssets.lowContactIcon,
+                      title: 'Low-contact Service Experience',
+                      description:
+                          'Lorem ipsum dolor sit amet, consectetur adipiscing in. Dictumst nullam mauris malesuada in. Eget in condimentum portior nec tristique penatibus ipsum.',
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: AppConstants.spaceXl),
               Center(
                 child: Text(
                   'HASSLE FREE\nQUALITY SERVICE',
                   textAlign: TextAlign.center,
-                  style: AppTextStyles.bodySmall,
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.textHint,
+                  ),
                 ),
               ),
               const SizedBox(height: AppConstants.spaceSm),

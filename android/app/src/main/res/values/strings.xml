@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Elssa</string>
-    <string name="facebook_app_id">1673048353956375</string>
-    <string name="facebook_client_token">da9d8ac02403fec1ff7308820e9a1edc</string>
-    <string name="fb_login_protocol_scheme">fb1673048353956375</string>
 </resources>

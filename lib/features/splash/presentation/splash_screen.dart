@@ -71,19 +71,24 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
                 opacity: _showFooter ? 1 : 0,
                 duration: AppConstants.animMedium,
                 curve: Curves.easeOutCubic,
-                child: RichText(
-                  text: TextSpan(
-                    style: AppTextStyles.caption.copyWith(
-                      fontStyle: FontStyle.italic,
-                    ),
-                    children: const [
-                      TextSpan(text: 'Powered by Oyelabs '),
-                      TextSpan(
-                        text: 'WITH LOVE ❤',
-                        style: TextStyle(color: AppColors.primary),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      'Powered by Oyelabs',
+                      style: AppTextStyles.caption.copyWith(
+                        fontStyle: FontStyle.italic,
                       ),
-                    ],
-                  ),
+                    ),
+                    Text(
+                      'WITH LOVE ❤',
+                      style: AppTextStyles.caption.copyWith(
+                        color: AppColors.primary,
+                        fontWeight: FontWeight.w600,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

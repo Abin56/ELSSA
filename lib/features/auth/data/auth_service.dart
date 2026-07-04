@@ -71,8 +71,64 @@ class AuthService {
 
     final credential = FacebookAuthProvider.credential(accessToken.tokenString);
 
-    final userCredential = await _firebaseAuth.signInWithCredential(credential);
-    await saveUserData(userCredential.user!, provider: 'facebook');
+    try {
+      final userCredential = await _firebaseAuth.signInWithCredential(
+        credential,
+      );
+      await saveUserData(userCredential.user!, provider: 'facebook');
+      return userCredential;
+    } on FirebaseAuthException catch (e) {
+      if (e.code != 'account-exists-with-different-credential') rethrow;
+      return _linkFacebookToGoogleAccount(credential, conflictError: e);
+    }
+  }
+
+  Future<UserCredential> _linkFacebookToGoogleAccount(
+    AuthCredential pendingFacebookCredential, {
+    required FirebaseAuthException conflictError,
+  }) async {
+    final email =
+        conflictError.email ??
+        (await _facebookAuth.getUserData(fields: 'email'))['email']
+            as String?;
+    if (email == null) {
+      throw const AppException(
+        'This email is already linked to another sign-in method. '
+        'Please sign in with that method first.',
+        code: 'account-exists-with-different-credential',
+      );
+    }
+
+  
+    final methods = await _firebaseAuth.fetchSignInMethodsForEmail(email);
+    if (methods.isNotEmpty && !methods.contains('google.com')) {
+      throw AppException(
+        'The email "$email" is already registered with a different '
+        'sign-in method. Please use that method to log in.',
+        code: 'account-exists-with-different-credential',
+      );
+    }
+
+    final googleUser = await _googleSignIn.signIn();
+    if (googleUser == null) {
+      throw const AppException(
+        'This email is already linked to a Google account. '
+        'Sign in with Google to connect Facebook.',
+        code: 'account-exists-with-different-credential',
+      );
+    }
+
+    final googleAuth = await googleUser.authentication;
+    final googleCredential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+
+    final userCredential = await _firebaseAuth.signInWithCredential(
+      googleCredential,
+    );
+    await userCredential.user!.linkWithCredential(pendingFacebookCredential);
+    await saveUserData(userCredential.user!, provider: 'google');
     return userCredential;
   }
 
